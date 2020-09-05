@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<script type="text/text/javascript" charset="UTF-8"></script>
+
+<script>
+
+var osType;
+/**
+ * Determine the mobile operating system.
+ * This function returns one of 'iOS', 'Android', 'Windows Phone', or 'unknown'.
+ *
+ * @returns {String}
+ */
+function getMobileOperatingSystem() {
+  osType = checkOS();
+
+  alert(osType);
+}
+
+function checkOS() {
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
+        return "Windows Phone";
+    }
+
+    if (/android/i.test(userAgent)) {
+        return "Android";
+    }
+
+    // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return "iOS";
+    }
+
+    return "unknown";
+}
+
+function aaa() {
+  alert('1');
+}
+
+function callNativeNoParam(){
+  try {
+    webkit.messageHandlers.callNativeNoParam.postMessage();
+  } catch (err) {
+    alert(err);
+  }
+};
+
+function callNativeWithParam() {
+  try {
+    webkit.messageHandlers.callNativeWithParam.postMessage(123);
+  } catch (e) {
+      alert(err);
+  } finally {
+    // do something
+  }
+}
+
+function callNativeWithParams() {
+  try {
+    webkit.messageHandlers.callNativeWithParams.postMessage({subject: '제목입니다', url: 'http://g-y-e-o-m.tistory.com'});
+  } catch (e) {
+      alert(err);
+  } finally {
+    // do something
+  }
+}
+// 처음 onLoad시 호출될 수 있는 함수
+function redHeader() {
+  alert('redHeader called');
+};
+
+function callFromPhone() {
+  alert('callFromPhone');
+}
+
+function callFromPhoneWithParam(param) {
+  alert('callFromPhone' + param);
+}
+
+function callFromPhoneWithParams(param1, param2) {
+  alert('callFromPhone' + param1 + ' ' + param2);
+}
+
+</script>
+
+</head>
+<body>
+
+<button onclick="aaa()">just alert</button>
+
+<input type="button" onclick="callNativeNoParam()" value="callNativeNoParam"/>
+<button onclick="callNativeWithParam()">callNativeWithParam</button>
+<button onclick="callNativeWithParams()">callNativeWithParams</button>
+<button onclick="getMobileOperatingSystem()">getMobileOperatingSystem</button>
+
+</body>
+</html>
