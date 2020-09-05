@@ -47,7 +47,7 @@ function aaa() {
 
 function callNativeNoParam(){
   try {
-    webkit.messageHandlers.callNativeNoParam.postMessage();
+    webkit.messageHandlers.callNativeNoParam.postMessage('');
   } catch (err) {
     alert(err);
   }
