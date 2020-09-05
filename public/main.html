@@ -4,11 +4,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-<script type="text/text/javascript" charset="UTF-8"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script type="text/javascript" charset="UTF-8"></script>
 
 <script>
 
 var osType;
+var kakaoSnsId;
 /**
  * Determine the mobile operating system.
  * This function returns one of 'iOS', 'Android', 'Windows Phone', or 'unknown'.
@@ -89,6 +92,27 @@ function callFromPhoneWithParams(param1, param2) {
   alert('callFromPhone' + param1 + ' ' + param2);
 }
 
+function setCookie(){
+  // 7일 뒤에 만료되는 쿠키 생성
+  $.cookie('kakaoSnsId', 'value', { expires: 7 });
+}
+
+function getCookie(){
+  kakaoSnsId = $.cookie('kakaoSnsId');
+
+  alert('kakaoSnsId : ' + kakaoSnsId);
+
+  return kakaoSnsId;
+}
+
+function getAllCookie(){
+  alert($.cookie());
+}
+
+function removeCookie(){
+  $.removeCookie("kakaoSnsId");
+}
+
 </script>
 
 </head>
@@ -100,6 +124,10 @@ function callFromPhoneWithParams(param1, param2) {
 <button onclick="callNativeWithParam()">callNativeWithParam</button>
 <button onclick="callNativeWithParams()">callNativeWithParams</button>
 <button onclick="getMobileOperatingSystem()">getMobileOperatingSystem</button>
+<button onclick="setCookie()">setCookie</button>
+<button onclick="getCookie()">getCookie</button>
+<button onclick="getAllCookie()">getAllCookie</button>
+<button onclick="removeCookie()">removeCookie</button>
 
 </body>
 </html>
